@@ -1,0 +1,4 @@
+[
+    {"id": 1, "nombre": "AMD Ryzen 7 7800X3D", "tipo": "Procesador", "precio": 380},
+    {"id": 2, "nombre": "NVIDIA RTX 4070", "tipo": "Tarjeta Gráfica", "precio": 600}
+]
