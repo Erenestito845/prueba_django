@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Lista de Componentes (Cargado desde JSON)</h2>
+<ul class="list-group mt-3">
+    {% for c in componentes %}
+        <li class="list-group-item d-flex justify-content-between">
+            <strong>{{ c.nombre }}</strong> - {{ c.tipo }} <span>${{ c.precio }}</span>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

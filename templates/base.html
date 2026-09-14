@@ -1,0 +1,44 @@
+<!-- Permite cargar archivos estáticos, como CSS, JavaScript e imágenes. -->
+{% load static %}
+
+<!-- Define la estructura principal del documento HTML. -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Configura la codificación para mostrar correctamente los caracteres en español. -->
+    <meta charset="UTF-8">
+    <!-- Permite que cada página hija defina su propio título. -->
+    <title>{% block title %}Mi Sitio Web{% endblock %}</title>
+    <!-- Carga los estilos de Bootstrap desde la carpeta static/css. -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body class="bg-light">
+    <!-- Barra de navegación principal del sitio. -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+        <div class="container">
+            <!-- Enlace al inicio de la sección de videojuegos. -->
+            <a class="navbar-brand" href="{% url 'juegos_inicio' %}">Portal Informativo</a>
+            <!-- Enlaces para navegar entre las secciones del sitio. -->
+            <div class="navbar-nav">
+                <a class="nav-link" href="{% url 'juegos_inicio' %}">Inicio Juegos</a>
+                <a class="nav-link" href="{% url 'juegos_lista' %}">Catálogo Juegos</a>
+                <a class="nav-link" href="{% url 'hardware_inicio' %}">Inicio Hardware</a>
+                <a class="nav-link" href="{% url 'hardware_lista' %}">Catálogo Hardware</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenedor donde se inserta el contenido de cada plantilla hija. -->
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- Pie de página que aparece en todas las páginas. -->
+    <footer class="text-center py-4 mt-5 bg-white border-top">
+        <p class="text-muted mb-0">Evaluación Sumativa 1 - Django</p>
+    </footer>
+
+    <!-- Carga el JavaScript de Bootstrap desde la carpeta static/js. -->
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

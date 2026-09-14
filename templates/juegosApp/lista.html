@@ -1,0 +1,19 @@
+<!-- Hereda la estructura general de la plantilla base.html. -->
+{% extends 'base.html' %}
+
+<!-- Define el contenido que se insertará en el bloque "content" de base.html. -->
+{% block content %}
+<h2>Catálogo de Juegos (Cargado desde JSON)</h2>
+
+<!-- Crea una lista con estilos de Bootstrap para mostrar los juegos. -->
+<ul class="list-group mt-3">
+    <!-- Recorre la lista "juegos" enviada desde la vista de Django. -->
+    {% for j in juegos %}
+        <!-- Muestra el nombre, categoría y precio de cada juego. -->
+        <li class="list-group-item d-flex justify-content-between">
+            <strong>{{ j.nombre }}</strong> - {{ j.categoria }} <span>${{ j.precio }}</span>
+        </li>
+    {% endfor %}
+</ul>
+<!-- Finaliza el bloque de contenido. -->
+{% endblock %}

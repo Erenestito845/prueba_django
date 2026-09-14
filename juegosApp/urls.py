@@ -19,6 +19,6 @@ from django.urls import path
 from juegosApp import views as vjuegos
 
 urlpatterns = [
-    path('', vjuegos.inicio, name='inicio_juegos'),
-    
+    path('', vjuegos.inicio, name='juegos_inicio'),
+    path('catalogo/', vjuegos.lista_juegos, name='juegos_lista'),
 ]

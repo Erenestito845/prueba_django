@@ -19,5 +19,6 @@ from django.urls import path
 from hardwareApp import views as vhardware
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('', vhardware.inicio_hardware, name='hardware_inicio'),
+    path('componentes/', vhardware.lista_hardware, name='hardware_lista'),
 ]

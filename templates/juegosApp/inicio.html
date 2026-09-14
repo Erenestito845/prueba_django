@@ -1,0 +1,21 @@
+<!-- Hereda la estructura y el diseño general de la plantilla base.html. -->
+{% extends 'base.html' %}
+
+<!-- Permite utilizar archivos estáticos, como imágenes, CSS y JavaScript. -->
+{% load static %}
+
+<!-- Indica el contenido que se insertará en el bloque "content" de base.html. -->
+{% block content %}
+<!-- Muestra el título de bienvenida a la sección de videojuegos. -->
+<h2>Bienvenido a la sección de Videojuegos</h2>
+
+<!-- Agrupa las imágenes y deja espacio entre ellas con el estilo gap-3 de Bootstrap. -->
+<div class="d-flex flex-wrap gap-3 my-3">
+	<!-- Carga la primera imagen desde la carpeta static/img. -->
+	<img src="{% static 'img/hollo.jpeg' %}" alt="Juegos" class="img-fluid rounded" style="max-width: 400px;">
+	<!-- Carga la segunda imagen desde la carpeta static/img. -->
+	<img src="{% static 'img/pokemon.jpeg' %}" alt="Pokémon" class="img-fluid rounded" style="max-width: 400px;">
+</div>
+
+<!-- Finaliza el bloque de contenido. -->
+{% endblock %} 
