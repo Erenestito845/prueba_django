@@ -1,11 +1,11 @@
 """Vistas del catálogo de componentes de hardware."""
 
-import json
+
 import os
 
 from django.shortcuts import render
 from django.conf import settings
-
+from .models import Componente
 
 def inicio_hardware(request):
     """Renderiza la página principal del catálogo de hardware."""
@@ -13,11 +13,7 @@ def inicio_hardware(request):
 
 
 def lista_hardware(request):
-    """Lee los componentes desde JSON y los envía a la plantilla del catálogo."""
-    # BASE_DIR permite localizar el JSON desde cualquier directorio de ejecución.
-    ruta_json = os.path.join(settings.BASE_DIR, 'data', 'hardware.json')
-    # Se cargan todos los componentes para entregarlos a la plantilla.
-    with open(ruta_json, 'r', encoding='utf-8') as file:
-        datos = json.load(file)
-    # La plantilla espera los datos bajo el nombre 'componentes'.
-    return render(request, 'hadwareApp/lista.html', {'componentes': datos})
+    # Obtiene todos los componentes guardados en la base de datos.
+    componentes = Componente.objects.all()
+    # Envía la lista a la plantilla con la clave que esta espera.
+    return render(request, 'hadwareApp/lista.html', {'componentes': componentes})

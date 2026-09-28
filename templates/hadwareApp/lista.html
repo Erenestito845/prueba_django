@@ -1,11 +1,54 @@
 {% extends 'base.html' %}
+
 {% block content %}
-<h2>Lista de Componentes (Cargado desde JSON)</h2>
-<ul class="list-group mt-3">
-    {% for c in componentes %}
-        <li class="list-group-item d-flex justify-content-between">
-            <strong>{{ c.nombre }}</strong> - {{ c.tipo }} <span>${{ c.precio }}</span>
-        </li>
-    {% endfor %}
-</ul>
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Catálogo de Componentes de Hardware</h2>
+    <!-- Botón Agregar visual -->
+    <button class="btn btn-primary" type="button">
+        + Agregar Componente
+    </button>
+</div>
+
+<!-- Barra de Búsqueda visual -->
+<form class="d-flex mb-4" role="search">
+    <input class="form-control me-2" type="search" placeholder="Buscar componente por nombre o marca...">
+    <button class="btn btn-outline-success" type="submit">Buscar</button>
+</form>
+
+<!-- Tabla de Componentes desde BD con Acciones Modificar / Eliminar -->
+<div class="table-responsive">
+    <table class="table table-striped table-hover table-bordered bg-white">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Marca</th>
+                <th>Categoría</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th class="text-center">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for c in componentes %}
+            <tr>
+                <td>{{ c.id }}</td>
+                <td><strong>{{ c.nombre }}</strong></td>
+                <td>{{ c.marca }}</td>
+                <td>{{ c.categoria.nombre }}</td>
+                <td>${{ c.precio }}</td>
+                <td>{{ c.stock }}</td>
+                <td class="text-center">
+                    <button class="btn btn-warning btn-sm">Modificar</button>
+                    <button class="btn btn-danger btn-sm">Eliminar</button>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7" class="text-center text-muted">No se encontraron componentes en la base de datos.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}

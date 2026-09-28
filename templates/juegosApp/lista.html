@@ -1,19 +1,52 @@
-<!-- Hereda la estructura general de la plantilla base.html. -->
 {% extends 'base.html' %}
 
-<!-- Define el contenido que se insertará en el bloque "content" de base.html. -->
 {% block content %}
-<h2>Catálogo de Juegos (Cargado desde JSON)</h2>
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Catálogo de Videojuegos</h2>
+    <!-- Botón Agregar visual -->
+    <button class="btn btn-primary" type="button">
+        + Agregar Juego
+    </button>
+</div>
 
-<!-- Crea una lista con estilos de Bootstrap para mostrar los juegos. -->
-<ul class="list-group mt-3">
-    <!-- Recorre la lista "juegos" enviada desde la vista de Django. -->
-    {% for j in juegos %}
-        <!-- Muestra el nombre, categoría y precio de cada juego. -->
-        <li class="list-group-item d-flex justify-content-between">
-            <strong>{{ j.nombre }}</strong> - {{ j.categoria }} <span>${{ j.precio }}</span>
-        </li>
-    {% endfor %}
-</ul>
-<!-- Finaliza el bloque de contenido. -->
+<!-- Barra de Búsqueda visual -->
+<form class="d-flex mb-4" role="search">
+    <input class="form-control me-2" type="search" placeholder="Buscar juego por título o género...">
+    <button class="btn btn-outline-success" type="submit">Buscar</button>
+</form>
+
+<!-- Tabla de Juegos desde BD con Acciones Modificar / Eliminar -->
+<div class="table-responsive">
+    <table class="table table-striped table-hover table-bordered bg-white">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Género / Categoría</th>
+                <th>Plataforma</th>
+                <th>Precio</th>
+                <th class="text-center">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for j in juegos %}
+            <tr>
+                <td>{{ j.id }}</td>
+                <td><strong>{{ j.titulo }}</strong></td>
+                <td>{{ j.genero }}</td>
+                <td>{{ j.plataforma.nombre }}</td>
+                <td>${{ j.precio }}</td>
+                <td class="text-center">
+                    <button class="btn btn-warning btn-sm">Modificar</button>
+                    <button class="btn btn-danger btn-sm">Eliminar</button>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6" class="text-center text-muted">No se encontraron juegos en la base de datos.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}
