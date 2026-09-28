@@ -1,0 +1,13 @@
+# Archivos de configuración de entorno y secretos
+.env
+*.env
+
+# Base de datos local por si usaste sqlite3 previamente
+*.sqlite3
+
+# Archivos compilados y entorno virtual
+__pycache__/
+*.pyc
+env/
+venv/
+.venv/
