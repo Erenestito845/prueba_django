@@ -21,4 +21,7 @@ from juegosApp import views as vjuegos
 urlpatterns = [
     path('', vjuegos.inicio, name='juegos_inicio'),
     path('catalogo/', vjuegos.lista_juegos, name='juegos_lista'),
+    path('catalogo/agregar/', vjuegos.agregar_juego, name='juego_agregar'),
+    path('catalogo/<int:id>/editar/', vjuegos.editar_juego, name='juego_editar'),
+    path('catalogo/<int:id>/eliminar/', vjuegos.eliminar_juego, name='juego_eliminar'),
 ]

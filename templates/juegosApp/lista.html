@@ -3,19 +3,16 @@
 {% block content %}
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h2>Catálogo de Videojuegos</h2>
-    <!-- Botón Agregar visual -->
-    <button class="btn btn-primary" type="button">
+    <a class="btn btn-primary" href="{% url 'juego_agregar' %}">
         + Agregar Juego
-    </button>
+    </a>
 </div>
 
-<!-- Barra de Búsqueda visual -->
-<form class="d-flex mb-4" role="search">
-    <input class="form-control me-2" type="search" placeholder="Buscar juego por título o género...">
+<form class="d-flex mb-4" role="search" method="get" action="{% url 'juegos_lista' %}">
+    <input class="form-control me-2" type="search" name="q" value="{{ query }}" placeholder="Buscar juego por título o género...">
     <button class="btn btn-outline-success" type="submit">Buscar</button>
 </form>
 
-<!-- Tabla de Juegos desde BD con Acciones Modificar / Eliminar -->
 <div class="table-responsive">
     <table class="table table-striped table-hover table-bordered bg-white">
         <thead class="table-dark">
@@ -37,8 +34,11 @@
                 <td>{{ j.plataforma.nombre }}</td>
                 <td>${{ j.precio }}</td>
                 <td class="text-center">
-                    <button class="btn btn-warning btn-sm">Modificar</button>
-                    <button class="btn btn-danger btn-sm">Eliminar</button>
+                    <a class="btn btn-warning btn-sm" href="{% url 'juego_editar' j.id %}">Modificar</a>
+                    <form class="d-inline" method="post" action="{% url 'juego_eliminar' j.id %}">
+                        {% csrf_token %}
+                        <button class="btn btn-danger btn-sm" type="submit">Eliminar</button>
+                    </form>
                 </td>
             </tr>
             {% empty %}

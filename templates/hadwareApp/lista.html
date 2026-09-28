@@ -3,15 +3,13 @@
 {% block content %}
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h2>Catálogo de Componentes de Hardware</h2>
-    <!-- Botón Agregar visual -->
-    <button class="btn btn-primary" type="button">
+    <a class="btn btn-primary" href="{% url 'hardware_componente_agregar' %}">
         + Agregar Componente
-    </button>
+    </a>
 </div>
 
-<!-- Barra de Búsqueda visual -->
-<form class="d-flex mb-4" role="search">
-    <input class="form-control me-2" type="search" placeholder="Buscar componente por nombre o marca...">
+<form class="d-flex mb-4" role="search" method="get" action="{% url 'hardware_lista' %}">
+    <input class="form-control me-2" type="search" name="q" value="{{ query }}" placeholder="Buscar componente por nombre, marca o categoría...">
     <button class="btn btn-outline-success" type="submit">Buscar</button>
 </form>
 
@@ -39,8 +37,11 @@
                 <td>${{ c.precio }}</td>
                 <td>{{ c.stock }}</td>
                 <td class="text-center">
-                    <button class="btn btn-warning btn-sm">Modificar</button>
-                    <button class="btn btn-danger btn-sm">Eliminar</button>
+                    <a class="btn btn-warning btn-sm" href="{% url 'hardware_componente_editar' c.id %}">Modificar</a>
+                    <form class="d-inline" method="post" action="{% url 'hardware_componente_eliminar' c.id %}">
+                        {% csrf_token %}
+                        <button class="btn btn-danger btn-sm" type="submit">Eliminar</button>
+                    </form>
                 </td>
             </tr>
             {% empty %}

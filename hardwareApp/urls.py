@@ -21,4 +21,7 @@ from hardwareApp import views as vhardware
 urlpatterns = [
     path('', vhardware.inicio_hardware, name='hardware_inicio'),
     path('componentes/', vhardware.lista_hardware, name='hardware_lista'),
+    path('componentes/agregar/', vhardware.agregar_componente, name='hardware_componente_agregar'),
+    path('componentes/<int:id>/editar/', vhardware.editar_componente, name='hardware_componente_editar'),
+    path('componentes/<int:id>/eliminar/', vhardware.eliminar_componente, name='hardware_componente_eliminar'),
 ]

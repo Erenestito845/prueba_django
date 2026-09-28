@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="mb-3">{{ accion }} Juego</h2>
+
+<form method="post" novalidate>
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="mb-3">
+        {{ field.label_tag }}
+        {{ field }}
+        {% for error in field.errors %}
+        <div class="text-danger small">{{ error }}</div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+    <div class="alert alert-danger">{{ error }}</div>
+    {% endfor %}
+    <button class="btn btn-primary" type="submit">{{ accion }}</button>
+    <a class="btn btn-secondary" href="{% url 'juegos_lista' %}">Cancelar</a>
+</form>
+{% endblock %}

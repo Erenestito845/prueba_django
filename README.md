@@ -20,23 +20,26 @@ Activa el entorno virtual del proyecto e instala las dependencias:
 ```bash
 source .venv/bin/activate
 pip install -r requirements.txt
-pip install python-dotenv
+cp .env.example .env
 ```
 
 ## Configuración
 
-La configuración se encuentra en `config/settings.py`. `python-dotenv` permite cargar variables desde un archivo `.env` en la raíz del proyecto.
+La configuración se encuentra en `config/settings.py`. Las variables se cargan desde `.env`, que no se debe subir a Git. El proyecto usa SQLite por defecto para el desarrollo local.
 
-Variables utilizadas:
+Para pasar a MySQL en AWS, cambia `DB_ENGINE` y completa el nombre, usuario, contraseña y endpoint de tu base de datos. No guardes credenciales reales en el repositorio. Después de configurar la base, ejecuta las migraciones con `python manage.py migrate`.
+
+Variables disponibles (la plantilla está en `.env.example`):
 
 ```env
-SECRET_KEY=una-clave-secreta
+SECRET_KEY=una-clave-secreta-generada-para-el-entorno
 DEBUG=True
+ALLOWED_HOSTS=localhost,127.0.0.1
 DB_ENGINE=django.db.backends.mysql
 DB_NAME=nombre_de_la_base
 DB_USER=usuario
 DB_PASSWORD=contraseña
-DB_HOST=127.0.0.1
+DB_HOST=endpoint-de-la-base-de-datos
 DB_PORT=3306
 ```
 
