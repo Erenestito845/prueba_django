@@ -71,3 +71,4 @@ data/            Archivos JSON con los datos mostrados
 templates/       Plantillas HTML
 static/          CSS, JavaScript e imágenes
 ```
+# proyectoCopec
